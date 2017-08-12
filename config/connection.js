@@ -2,12 +2,18 @@ var mysql = require("mysql");
 
 // Sets up the connection to the Burger database
 
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "SQLmy123",
-  database: "burgers_db"
-});
+var connection
+
+if (process.env.JAWSDB_URL) {
+	connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+	connection = mysql.createConnection({
+		host: 'localhost'
+		user: 'root',
+		password: 'SQLmy123',
+		database: 'burgers_db'
+	});
+}
 
 connection.connect(function(err) {
   if (err) {
